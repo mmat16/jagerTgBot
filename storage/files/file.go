@@ -16,7 +16,7 @@ type Storage struct {
 	basePath string
 }
 
-const defaultPerm = 777
+const defaultPerm = 0774
 
 func New(basePath string) Storage {
 	return Storage{basePath: basePath}
@@ -90,7 +90,7 @@ func (s Storage) IsExists(p *storage.Page) (bool, error) {
 	}
 	path := filepath.Join(s.basePath, p.UserName, fileName)
 	switch _, err = os.Stat(path); {
-	case errors.Is(err, storage.ErrNoSavedPages):
+	case errors.Is(err, os.ErrNotExist):
 		return false, nil
 	case err != nil:
 		msg := fmt.Sprintf("can't check if file %s exists", path)
