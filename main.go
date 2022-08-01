@@ -2,13 +2,16 @@ package main
 
 import (
 	"flag"
+	"jagerTgBot/clients/telegram"
 	"log"
 )
 
-func main() {
-	token := mustToken()
+const (
+	tgBotHost = "api.telegram.org"
+)
 
-	// tgClient = telegram.New(token)
+func main() {
+	tgClient := telegram.New(tgBotHost, mustToken())
 
 	// fetcher = fetcher.New()
 
